@@ -1,47 +1,34 @@
 package app.entities;
 
-import app.dto.ProductDTO;
+import app.enums.Category;
 import jakarta.persistence.*;
-import app.Category;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
 public class Product {
-
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
     private int id;
     private String name;
     private double price;
+    @Enumerated(EnumType.STRING)
     private Category category;
 
-    @ManyToOne
-    @JoinColumn (name = "products")
-    private Basket basket;
+    @OneToMany(mappedBy = "product")
+    private List<BasketProduct> basketProducts = new ArrayList<>();
 
-    public Product(int id, String name, double price, Category category) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.category = category;
-    }
 
     public Product(String name, double price, Category category) {
         this.name = name;
         this.price = price;
         this.category = category;
-    }
-
-    public Product(ProductDTO productDTO){
-        this.name = productDTO.getName();
-        this.price = productDTO.getPrice();
-        this.category = productDTO.getCategory();
     }
 }

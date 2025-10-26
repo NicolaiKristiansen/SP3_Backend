@@ -1,6 +1,5 @@
 package app.entities;
 
-import app.dto.BasketDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,19 +18,10 @@ public class Basket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
-    private List<Product> products = new ArrayList<>();
+    @OneToMany(mappedBy = "basket", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    private List<BasketProduct> basketProducts = new ArrayList<>();
 
-    @OneToOne
-    private Receipt receipt;
-
-    public Basket(int id, List<Product> products) {
+    public Basket(int id) {
         this.id = id;
-        this.products = products;
-    }
-
-    public Basket(BasketDTO basketDTO) {
-        this.id = basketDTO.getId();
-        this.products = basketDTO.getProducts();
     }
 }

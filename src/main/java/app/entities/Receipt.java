@@ -1,40 +1,36 @@
 package app.entities;
 
-
-import app.dto.ReceiptDTO;
+import app.dtos.receipt.ReceiptDTO;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
+@ToString
+@EqualsAndHashCode
+
 
 @Entity
 public class Receipt {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int id;
+    private int id;
 
-    public double totalPrice;
-
+    private double totalPrice;
 
     @OneToOne
-    @JoinColumn(name = "basket_id")
-    public Basket basket;
+    private Basket basket;
 
-    public Receipt(ReceiptDTO dto){
-        this.id = dto.getId();
-        this.totalPrice = dto.getTotalPrice();
-        if(dto.getBasketId() != 0) {
-            Basket b = new Basket();
-            b.setId(dto.getBasketId()); // sæt kun ID
-            this.basket = b;
-        }
+    public Receipt(double totalPrice, Basket basket) {
+        this.totalPrice = totalPrice;
+        this.basket = basket;
     }
 
+    public Receipt(ReceiptDTO receiptDTO) {
+        this.id = receiptDTO.getId();
+        this.totalPrice = receiptDTO.getTotalPrice();
+    }
 }

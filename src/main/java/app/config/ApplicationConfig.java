@@ -1,5 +1,8 @@
 package app.config;
 
+
+import app.security.controllers.ISecurityController;
+import app.security.controllers.SecurityController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import app.exceptions.ApiException;
@@ -23,7 +26,8 @@ public class ApplicationConfig {
     private static JavalinConfig javalinConfig;
     private static Javalin app;
 
-    //private static ISecurityController securityController = new SecurityController();
+
+    private static ISecurityController securityController = new SecurityController();
 
     private ApplicationConfig() {
     }
@@ -43,6 +47,7 @@ public class ApplicationConfig {
             config.http.defaultContentType = "application/json"; // default content type for requests
             config.router.contextPath = "/api"; // base path for all routes
             config.bundledPlugins.enableRouteOverview("/routes"); // html overview of all registered routes at /routes for api documentation: https://javalin.io/news/2019/08/11/javalin-3.4.1-released.html
+
         });
         return appConfig;
     }
@@ -70,6 +75,13 @@ public class ApplicationConfig {
         ctx.header("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE, OPTIONS");
         ctx.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
         ctx.header("Access-Control-Allow-Credentials", "true");
+    }
+
+    // Adding below methods to ApplicationConfig, means that EVERY ROUTE will be checked for security roles. So open routes must have a role of ANYONE
+    public ApplicationConfig checkSecurityRoles() {
+        app.beforeMatched(securityController.authenticate()); // check if there is a valid token in the header
+        app.beforeMatched(securityController.authorize()); // check if the user has the required role
+        return appConfig;
     }
 
     //     Adding below methods to ApplicationConfig, means that EVERY ROUTE will be checked for security roles. So open routes must have a role of ANYONE
