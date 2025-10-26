@@ -14,6 +14,7 @@ import dk.bugelhartmann.TokenVerificationException;
 import dk.bugelhartmann.UserDTO;
 
 import io.javalin.http.*;
+import org.jetbrains.annotations.NotNull;
 
 import java.text.ParseException;
 import java.util.Set;
@@ -201,5 +202,9 @@ public class SecurityController implements ISecurityController {
             throw new UnauthorizedResponse("Invalid user or token"); // UnauthorizedResponse is javalin 6 specific but response is not json!
         }
         return verifiedTokenUser;
+    }
+
+    public void healthCheck(@NotNull Context ctx) {
+        ctx.status(200).json("{\"msg\": \"API is up and running\"}");
     }
 }
