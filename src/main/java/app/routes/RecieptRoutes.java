@@ -9,7 +9,8 @@ ReceiptController receiptController = new ReceiptController();
 
     public EndpointGroup getRoutes(){
         return () -> {
-
+            get("/{id}", receiptController::getReceipt);
+            get("/", receiptController::getAll);
         };
     }
 }

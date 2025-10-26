@@ -1,15 +1,17 @@
 package app.entities;
 
+import app.dtos.receipt.ReceiptDTO;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
+@ToString
+
+
 @Entity
 public class Receipt {
     @Id
@@ -24,5 +26,10 @@ public class Receipt {
     public Receipt(double totalPrice, Basket basket) {
         this.totalPrice = totalPrice;
         this.basket = basket;
+    }
+
+    public Receipt(ReceiptDTO receiptDTO) {
+        this.id = receiptDTO.getId();
+        this.totalPrice = receiptDTO.getTotalPrice();
     }
 }

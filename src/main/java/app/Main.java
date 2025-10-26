@@ -4,6 +4,7 @@ import app.config.ApplicationConfig;
 import app.config.HibernateConfig;
 import app.routes.Routes;
 import app.security.routes.SecurityRoutes;
+import jakarta.persistence.EntityManagerFactory;
 
 import static io.javalin.apibuilder.ApiBuilder.get;
 import static io.javalin.apibuilder.ApiBuilder.path;

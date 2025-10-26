@@ -13,6 +13,7 @@ public class BasketRoutes {
     public EndpointGroup getRoutes() {
         return () -> {
             post("/", basketController::addProductToBasket, Role.USER);
+            post("/buy/{id}", basketController::buyBasket);
         };
     }
 }

@@ -2,9 +2,15 @@ package app.controllers;
 
 import app.config.HibernateConfig;
 import app.daos.ReceiptDAO;
+import app.dtos.receipt.ReceiptDTO;
+import app.entities.Receipt;
+import app.exceptions.ApiException;
+import io.javalin.http.Context;
 import jakarta.persistence.EntityManagerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.List;
 
 public class ReceiptController {
     EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory();
@@ -14,7 +20,7 @@ public class ReceiptController {
     private static final Logger logger = LoggerFactory.getLogger(ReceiptController.class);
     private static final Logger debugLogger = LoggerFactory.getLogger("app");
 
-/*
+
     public void getAll(Context ctx){
         try {
             List<ReceiptDTO> receiptDTOS = receiptDAO.getAllReceipt();
@@ -58,5 +64,5 @@ public class ReceiptController {
 
     }
 
- */
+
 }
