@@ -18,7 +18,7 @@ public class Basket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToMany(mappedBy = "basket", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "basket", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     private List<BasketProduct> basketProducts = new ArrayList<>();
 
     public Basket(int id) {

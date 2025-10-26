@@ -5,7 +5,7 @@
 POST http://{{url}}/auth/register
 
 {
-    "username": "user1",
+    "username": "user2",
     "password": "pass12345"
 }
 
@@ -32,10 +32,10 @@ AUTHORIZATION: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJcIk1hZ251cyBTaW1vbnNlblwiI
 ### post a product to specific basket -- User Token
 POST https://{{url}}/baskets
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJcIk1hZ251cyBTaW1vbnNlblwiIiwic3ViIjoidXNlcjEiLCJleHAiOjE3NjE0MTgzNTksInJvbGVzIjoiVXNlciIsInVzZXJuYW1lIjoidXNlcjEifQ.rd6I26IuCmjMhPxqfGju8OS4vOdJd4fKrfCwclMlHNQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJcIk1hZ251cyBTaW1vbnNlblwiIiwic3ViIjoidXNlcjIiLCJleHAiOjE3NjE0NzYwNzMsInJvbGVzIjoiVXNlciIsInVzZXJuYW1lIjoidXNlcjIifQ.FFAEeJYFVbbd93nromUDdT5wybZWXNfIND5vFYr8LYU
 
 {
-  "basketId": "2",
+  "basketId": "1",
   "productId": "3",
   "amount": "10"
 }
@@ -80,12 +80,13 @@ Accept: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJcIk1hZ251cyBTaW1vbnNlblwiIiwic3ViIjoiQURNSU4iLCJleHAiOjE3NjE0MTg0MjEsInJvbGVzIjoiQWRtaW4iLCJ1c2VybmFtZSI6IkFETUlOIn0.y6VJ8BuQ5OhxpAdrsRLc4yD1ROn4Q2UfGKQSQzFxXg8
 
 ### find all products from specific basket -- User Token
-GET https://{{url}}/basketproducts/2
+GET https://{{url}}/basketproducts/1
 Accept: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJcIk1hZ251cyBTaW1vbnNlblwiIiwic3ViIjoidXNlcjEiLCJleHAiOjE3NjE0MTgzNTksInJvbGVzIjoiVXNlciIsInVzZXJuYW1lIjoidXNlcjEifQ.rd6I26IuCmjMhPxqfGju8OS4vOdJd4fKrfCwclMlHNQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJcIk1hZ251cyBTaW1vbnNlblwiIiwic3ViIjoidXNlcjIiLCJleHAiOjE3NjE0NzYwNzMsInJvbGVzIjoiVXNlciIsInVzZXJuYW1lIjoidXNlcjIifQ.FFAEeJYFVbbd93nromUDdT5wybZWXNfIND5vFYr8LYU
+
 
 ### buy function, with basket id.
-POST http://{{url}}/baskets/buy/2
+POST http://{{url}}/baskets/buy/1
 
 
 ### Get Receipt

@@ -32,7 +32,8 @@ public class BasketController {
         }
 
         Product product = productDAO.findById(dto.getProductId());
-        BasketProduct basketProduct = new BasketProduct(basket, product, dto.getAmount());
+        double price = dto.getAmount() * product.getPrice();
+        BasketProduct basketProduct = new BasketProduct(basket, product, dto.getAmount(), price);
 
         basketProductDAO.create(basketProduct);
         ctx.status(HttpStatus.OK);
@@ -49,10 +50,7 @@ public class BasketController {
 
         double basketTotalPrice = 2000; // You can replace this with a method that calculates total
 
-        Receipt receipt = Receipt.builder()
-                .basket(basket)
-                .totalPrice(basketTotalPrice)
-                .build();
+        Receipt receipt = new Receipt(basketTotalPrice, basket);
 
         receiptDAO.create(receipt);
 

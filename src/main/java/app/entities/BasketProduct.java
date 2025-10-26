@@ -22,9 +22,12 @@ public class BasketProduct {
 
     private double amount;
 
-    public BasketProduct(Basket basket, Product product, double amount) {
+    private double price;
+
+    public BasketProduct(Basket basket, Product product, double amount, double price) {
         this.basket = basket;
         this.product = product;
         this.amount = amount;
+        this.price = price;
     }
 }
