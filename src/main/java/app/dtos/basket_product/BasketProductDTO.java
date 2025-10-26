@@ -16,4 +16,5 @@ public class BasketProductDTO {
     private int basketId;
     private String productName;
     private double amount;
+    private double price;
 }

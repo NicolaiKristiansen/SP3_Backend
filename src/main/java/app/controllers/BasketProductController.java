@@ -28,7 +28,8 @@ public class BasketProductController {
                             basketProduct.getId(),
                             basketProduct.getBasket().getId(),
                             basketProduct.getProduct().getName(),
-                            basketProduct.getAmount()
+                            basketProduct.getAmount(),
+                            basketProduct.getPrice()
                     ))
                     .collect(Collectors.toList());
 

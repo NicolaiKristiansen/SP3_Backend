@@ -15,6 +15,8 @@ import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
 import jakarta.persistence.EntityManagerFactory;
 
+import java.util.List;
+
 public class BasketController {
     private final EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory();
 
@@ -32,7 +34,8 @@ public class BasketController {
         }
 
         Product product = productDAO.findById(dto.getProductId());
-        BasketProduct basketProduct = new BasketProduct(basket, product, dto.getAmount());
+        double price = dto.getAmount() * product.getPrice();
+        BasketProduct basketProduct = new BasketProduct(basket, product, dto.getAmount(), price);
 
         basketProductDAO.create(basketProduct);
         ctx.status(HttpStatus.OK);
@@ -46,17 +49,17 @@ public class BasketController {
             ctx.status(404).result("Basket not found");
             return;
         }
+        double basketTotalPrice = 0; // You can replace this with a method that calculates total
+        List<BasketProduct> basketProducts = basketDAO.getProductsFromBasket(id);
+        for (BasketProduct basketProduct : basketProducts) {
+            basketTotalPrice += basketProduct.getPrice();
+        }
 
-        double basketTotalPrice = 2000; // You can replace this with a method that calculates total
 
-        Receipt receipt = Receipt.builder()
-                .basket(basket)
-                .totalPrice(basketTotalPrice)
-                .build();
+        Receipt receipt = new Receipt(basketTotalPrice, basket);
 
         receiptDAO.create(receipt);
 
-        ctx.json(receipt);
         ctx.status(201).result("Receipt created successfully with ID: " + receipt.getId());
     }
 
