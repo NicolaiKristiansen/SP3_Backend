@@ -17,13 +17,13 @@ class ProductControllerTest {
 
     @BeforeAll
     public static void setup() {
-        RestAssured.baseURI = "http://localhost:7070";
+        RestAssured.baseURI = "http://localhost:7080";
         RestAssured.basePath = "/api/products";
         ApplicationConfig.
                 getInstance()
                 .initiateServer()
                 .setRoute(new Routes().getRoutes())
-                .startServer(7070);
+                .startServer(7080);
     }
 
     @Test
