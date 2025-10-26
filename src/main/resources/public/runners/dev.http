@@ -37,7 +37,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJcIk1hZ251cyBTaW1vbnNlblwiI
 {
   "basketId": "1",
   "productId": "3",
-  "amount": "10"
+  "amount": "2"
 }
 
 
