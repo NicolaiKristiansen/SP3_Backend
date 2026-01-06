@@ -23,10 +23,10 @@ public class Main {
         ApplicationConfig
                 .getInstance()
                 .initiateServer()
-                .checkSecurityRoles() // check for role when route is called
                 .setRoute(new SecurityRoutes().getSecurityRoutes())
                 .setRoute(SecurityRoutes.getSecuredRoutes())
                 .setRoute(new Routes().getRoutes())
+                .checkSecurityRoles() // check for role when route is called
                 .setRoute(()->{
                     path("/index",()->{
                         get("/",ctx->ctx.render("index.html"));

@@ -13,7 +13,7 @@ public class ProductRoutes {
         return () -> {
             post("", controller::create, Role.ADMIN);
             get("{id}", controller::findByID, Role.ADMIN, Role.USER);
-            get("", controller::getAll, Role.ANYONE);
+            get("/", controller::getAll, Role.ANYONE);
             put("{id}", controller::update, Role.ADMIN);
             delete("{id}", controller::delete, Role.ADMIN);
         };
