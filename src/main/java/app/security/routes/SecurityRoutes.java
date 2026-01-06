@@ -15,11 +15,9 @@ public class SecurityRoutes {
 
     public EndpointGroup getSecurityRoutes() {
         return () -> {
-            path("/auth", () -> {
                 get("/healthcheck", securityController::healthCheck);
                 post("/login", securityController.login());
                 post("/register", securityController.register());
-            });
         };
     }
 

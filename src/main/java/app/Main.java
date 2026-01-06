@@ -34,6 +34,7 @@ public class Main {
                 })
                 .startServer(7070)
                 .setCORS()
+                .setCORSOrigin("http://WebShop.cupcakebornholm.dk")
                 .setGeneralExceptionHandling();
     }
 }

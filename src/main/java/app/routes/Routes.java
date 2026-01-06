@@ -1,5 +1,6 @@
 package app.routes;
 
+import app.security.routes.SecurityRoutes;
 import io.javalin.apibuilder.EndpointGroup;
 
 import static io.javalin.apibuilder.ApiBuilder.get;
@@ -11,6 +12,7 @@ public class Routes {
   private ProductRoutes productRoutes = new ProductRoutes();
   private BasketProductRoutes basketProductRoutes = new BasketProductRoutes();
   private PopulateRoutes populateRoutes = new PopulateRoutes();
+  private SecurityRoutes securityRoutes = new SecurityRoutes();
 
   public EndpointGroup getRoutes() {
         return () -> {
@@ -20,6 +22,7 @@ public class Routes {
             path("/basketproducts", basketProductRoutes.getRoutes());
             path("/products", productRoutes.getRoutes());
             path("/populate", populateRoutes.getRoutes());
+            path("/auth", securityRoutes.getSecurityRoutes());
         };
     }
 }
