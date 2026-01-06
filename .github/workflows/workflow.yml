@@ -48,7 +48,7 @@ jobs:
           # Define SSH connection info
           SSH_USER="nico"
           DO_DROPLET_IP=${{ secrets.DO_DROPLET_IP }}
-          APP_NAME="WebShop"
+          APP_NAME="backend"
           REMOTE_PATH="/home/nico/deployment/site/$APP_NAME/"
 
           # Sync build output to the Droplet using rsync
