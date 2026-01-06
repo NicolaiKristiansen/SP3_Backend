@@ -11,11 +11,11 @@ public class ProductRoutes {
 
     public EndpointGroup getRoutes(){
         return () -> {
-            post("/", controller::create, Role.ADMIN);
-            get("/{id}", controller::findByID, Role.ADMIN, Role.USER);
-            get("/", controller::getAll, Role.ADMIN, Role.USER);
-            put("/{id}", controller::update, Role.ADMIN);
-            delete("/{id}", controller::delete, Role.ADMIN);
+            post("", controller::create, Role.ADMIN);
+            get("{id}", controller::findByID, Role.ADMIN, Role.USER);
+            get("", controller::getAll, Role.ADMIN, Role.USER);
+            put("{id}", controller::update, Role.ADMIN);
+            delete("{id}", controller::delete, Role.ADMIN);
         };
     }
 }
