@@ -26,12 +26,12 @@ public class Main {
                 .setRoute(new SecurityRoutes().getSecurityRoutes())
                 .setRoute(SecurityRoutes.getSecuredRoutes())
                 .setRoute(new Routes().getRoutes())
-                .checkSecurityRoles() // check for role when route is called
                 .setRoute(()->{
                     path("/index",()->{
                         get("/",ctx->ctx.render("index.html"));
                     });
                 })
+                .checkSecurityRoles() // check for role when route is called
                 .startServer(7070)
                 .setCORS()
                 .setGeneralExceptionHandling();
