@@ -2,6 +2,9 @@ package app;
 
 import app.config.ApplicationConfig;
 import app.config.HibernateConfig;
+import app.exceptions.EntityNotFoundException;
+import app.populators.PopulateRole;
+import app.routes.PopulateRoutes;
 import app.routes.Routes;
 import app.security.routes.SecurityRoutes;
 import jakarta.persistence.EntityManagerFactory;
@@ -10,10 +13,12 @@ import static io.javalin.apibuilder.ApiBuilder.get;
 import static io.javalin.apibuilder.ApiBuilder.path;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws EntityNotFoundException {
         System.out.println("Hello SP2");
 
         HibernateConfig.getEntityManagerFactory();
+
+        PopulateRole.runRolesAndProducts();
 
         ApplicationConfig
                 .getInstance()
