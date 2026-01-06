@@ -37,3 +37,23 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/sp2_api:latest
+
+      - name: Set up SSH agent
+          uses: webfactory/ssh-agent@v0.9.0
+          with:
+            ssh-private-key: ${{ secrets.DO_SSH_KEY }}
+
+      - name: Deploy to DigitalOcean Droplet via SSH
+          run: |
+            SSH_USER="nico"
+            DO_DROPLET_IP="${{ secrets.DO_DROPLET_IP }}"
+            APP_Name="backend"
+            REMOTE_PATH="/home/nico/deployment/site/$APP_Name"
+            
+            # SSH to Droplet and pull the latest Docker image
+            ssh -o StrictHostKeyChecking=no $SSH_USER@$DO_DROPLET_IP <<EOF
+              docker pull yourusername/sp2_backend:latest
+              docker stop backend-api || true
+              docker rm backend-api || true
+              docker run -d --name backend-api -p 8080:8080 yourusername/sp2_backend:latest
+            EOF
