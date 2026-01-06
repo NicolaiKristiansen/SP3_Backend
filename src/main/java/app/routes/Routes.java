@@ -16,7 +16,7 @@ public class Routes {
 
   public EndpointGroup getRoutes() {
         return () -> {
-            get("/", ctx -> ctx.result("Hello World"));
+            get("/", ctx -> ctx.result("Hello World"), SecurityRoutes.Role.ANYONE);
             path("/baskets", basketRoutes.getRoutes());
             path("/receipt", recieptRoutes.getRoutes());
             path("/basketproducts", basketProductRoutes.getRoutes());
