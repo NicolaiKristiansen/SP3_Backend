@@ -39,12 +39,12 @@ jobs:
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/sp2_api:latest
 
       - name: Set up SSH agent
-          uses: webfactory/ssh-agent@v0.9.0
-          with:
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
             ssh-private-key: ${{ secrets.DO_SSH_KEY }}
 
       - name: Deploy to DigitalOcean Droplet via SSH
-          run: |
+        run: |
             SSH_USER="nico"
             DO_DROPLET_IP="${{ secrets.DO_DROPLET_IP }}"
             APP_Name="backend"
